@@ -1,0 +1,11 @@
+# torchao y pillow se instalan en el Dockerfile con la versión nightly correcta.
+# NO añadirlos aquí o sobreescriben la versión con int4_weight_only.
+fastapi
+uvicorn[standard]
+numpy
+transformers>=4.41.0,<4.46.0
+accelerate>=0.30.0
+safetensors
+bitsandbytes>=0.43.0
+python-multipart
+huggingface_hub>=0.23
