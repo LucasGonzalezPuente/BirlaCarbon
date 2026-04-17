@@ -1,0 +1,21 @@
+services:
+  moondream-api:
+    build: .
+    ports: ["8001:8000"]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      CUDA_VISIBLE_DEVICES: "0"
+      NVIDIA_DRIVER_CAPABILITIES: "compute,utility"
+      HF_HOME: /models/hf
+      HUGGINGFACE_HUB_CACHE: /models/hf
+      PYTORCH_CUDA_ALLOC_CONF: expandable_segments:True
+      DEFAULT_MODEL: "moondream/moondream-2b-2025-04-14-4bit"
+    volumes:
+      - ./models:/models
+    restart: unless-stopped
